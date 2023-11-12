@@ -136,28 +136,36 @@ class _MainScreenState extends State<MainScreen>
               Row(children: [
                 Text("Cardholder name: ${bankCard.CardHolderName}"),
               ]),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Row(
                 children: [
                 const Text("Card type: "), Text(MapCardTypeToString(bankCard.CardType!)), 
                 ]
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Row(
                 children: [
                   const Text("Country code: "), Text(bankCard.CountryOfOrigin),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Row(
                 children: [
                  const Text("Valid until: "), Text(bankCard.ExpirationDate),
                 ]
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Row(
                 children: [
                   const Text("From a banned country: "), Text( bankCard.IsFromBannedCountry == 1 ? "Yes" : "No"),
+                ]
+              ),
+              const SizedBox(height: 5),
+              Row(
+                children: [
+                const Text("CVV: "), widget.currentUser!.UserRole == Role.Guest 
+                  ? const Text( "---") 
+                  : Text(bankCard.Cvv)
                 ]
               )
             ],
