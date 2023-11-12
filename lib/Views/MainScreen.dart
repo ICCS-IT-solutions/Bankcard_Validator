@@ -9,6 +9,7 @@ import "package:main/Models/CountryDataModel.dart";
 import "../Bloc/CountryBloc.dart";
 import "../Models/UserDataModel.dart";
 import "BankCardScreen.dart";
+import "ConfigScreen.dart";
 import "CountryScreen.dart";
 
 class MainScreen extends StatefulWidget
@@ -176,7 +177,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => CountryScreen(currentUser: widget.currentUser!)
+                  builder: (context) => const CountryScreen()
                 )
               );
             });
@@ -185,12 +186,20 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => BankCardScreen(currentUser: widget.currentUser!)
+                  builder: (context) => const BankCardScreen()
                 )
               );
             });            
           }, icon: const Icon(Icons.add_box_outlined), label: const Text("Register bank card")),
-          TextButton.icon(style: ButtonStyle (foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onPrimary)),onPressed: (){}, icon: const Icon(Icons.settings_applications_outlined), label: const Text("Config")),
+          TextButton.icon(style: ButtonStyle (foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onPrimary)),onPressed: (){
+            setState(() {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ConfigScreen()
+                )
+              );
+            });
+          }, icon: const Icon(Icons.settings_applications_outlined), label: const Text("Config")),
           TextButton.icon(style: ButtonStyle (foregroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onPrimary)),onPressed: HandleLogoff, icon: const Icon(Icons.logout_outlined), label: const Text("Log off")),
         ]
       ),
@@ -230,7 +239,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => CountryScreen(currentUser: widget.currentUser!)
+                  builder: (context) => const CountryScreen()
                 )
               );
             });
@@ -239,12 +248,20 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => BankCardScreen(currentUser: widget.currentUser!)
+                  builder: (context) => const BankCardScreen()
                 )
               );
             });
           }, icon: const Icon(Icons.add_box_outlined)),
-          IconButton(color: Theme.of(context).colorScheme.onPrimary, onPressed: (){}, icon: const Icon(Icons.settings_applications_outlined)),
+          IconButton(color: Theme.of(context).colorScheme.onPrimary, onPressed: (){
+            setState(() {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ConfigScreen()
+                )
+              );
+            });            
+          }, icon: const Icon(Icons.settings_applications_outlined)),
           IconButton(color: Theme.of(context).colorScheme.onPrimary, onPressed: HandleLogoff, icon: const Icon(Icons.logout_outlined)),
         ],
       ),

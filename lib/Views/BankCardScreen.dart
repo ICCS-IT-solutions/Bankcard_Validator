@@ -7,7 +7,7 @@ import "../Models/BankCardDataModel.dart";
 import "../Models/UserDataModel.dart";
 class BankCardScreen extends StatefulWidget
 {
-  const BankCardScreen({required UserDataModel currentUser, super.key});
+  const BankCardScreen({super.key});
 
   @override
   State<BankCardScreen> createState() => _BankCardScreenState();
@@ -20,6 +20,8 @@ class _BankCardScreenState extends State<BankCardScreen>
   TextEditingController CountryOfOriginController = TextEditingController();
   TextEditingController ExpirationDateController = TextEditingController();
   TextEditingController CvvController = TextEditingController();
+  UserDataModel? currentUser;
+
   final _formKey=GlobalKey<FormState>();
   Widget BankCardRegistrationForm(BuildContext context, BankCardBloc bankCardBloc)
   {

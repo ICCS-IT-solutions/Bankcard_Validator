@@ -7,7 +7,7 @@ import "../Bloc/CountryBloc.dart";
 
 class CountryScreen extends StatefulWidget
 {
-  const CountryScreen({required UserDataModel currentUser, super.key});
+  const CountryScreen({super.key});
 
   @override
   State<CountryScreen> createState() => _CountryScreenState();
@@ -19,7 +19,7 @@ class _CountryScreenState extends State<CountryScreen>
   TextEditingController CountryNameController = TextEditingController();
   TextEditingController CountryCodeController = TextEditingController();
   TextEditingController BanReasonController = TextEditingController();
-
+  UserDataModel? currentUser;
   void HandleReset()
   {
     CountryNameController.clear();

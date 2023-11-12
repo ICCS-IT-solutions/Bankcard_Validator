@@ -30,6 +30,12 @@ void main() async
     "salt": "VARCHAR(255)",
     "userRole": "VARCHAR(255)",
     //Storing these as Y/N enums:
+    "userRight_createDatabase" : "ENUM('Y','N')",
+    "userRight_createTable" : "ENUM('Y','N')",
+    "userRight_setRootUsername" : "ENUM('Y','N')",
+    "userRight_setRootPassword" : "ENUM('Y','N')",
+    "userRight_createDbConnectionConfig" : "ENUM('Y','N')",
+    "userRight_editDbConnectionConfig" : "ENUM('Y','N')",
     "userRight_registerCard" : "ENUM('Y','N')",
     "userRight_registerCountry": "ENUM('Y','N')",
     "userRight_viewCards" : "ENUM('Y','N')",
