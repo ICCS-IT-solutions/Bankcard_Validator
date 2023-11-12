@@ -25,6 +25,12 @@ class UserRightsHandler
   static List<UserRight> _AdminRights()
   {
     return [
+      UserRight.createDatabase,
+      UserRight.createTable,
+      UserRight.setRootUsername,
+      UserRight.setRootPassword,
+      UserRight.createDbConnectionConfig,
+      UserRight.editDbConnectionConfig,
       UserRight.registerCard,
       UserRight.registerCountry,
       UserRight.viewCards,

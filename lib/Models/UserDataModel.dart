@@ -5,6 +5,14 @@ import 'UserRightsHandler.dart';
 
 enum Role {Administrator, Manager, User, Guest}
 enum UserRight {
+  //Administrator-only:
+  createDatabase,
+  createTable,
+  setRootUsername,
+  setRootPassword,
+  createDbConnectionConfig,
+  editDbConnectionConfig,
+  //App-specific:
   registerCard,
   registerCountry,
   viewCards,
@@ -42,19 +50,25 @@ UserDataModel({this.UserName, this.Password, this.HashedPassword, this.Salt, thi
       Salt: dictionary["salt"],
       UserRole : MapRoleNameToRole(dictionary["userRole"]),
       UserRights :[
-        if(dictionary["userRights_registerCard"] == 'Y') UserRight.registerCard,
-        if(dictionary["userRights_registerCountry"] == 'Y') UserRight.registerCountry,
-        if(dictionary["userRights_viewCards"] == 'Y') UserRight.viewCards,
-        if(dictionary["userRights_viewCountries"] == 'Y') UserRight.viewCountries,
-        if(dictionary["userRights_registerUser"] == 'Y') UserRight.registerUser,
-        if(dictionary["userRights_resetPassword"] == 'Y') UserRight.resetPassword,
-        if(dictionary["userRights_viewUsers"] == 'Y') UserRight.viewUsers,
-        if(dictionary["userRights_banCountry"] == 'Y') UserRight.banCountry,
-        if(dictionary["userRights_banCard"] == 'Y') UserRight.banCard,
-        if(dictionary["userRights_banUser"] == 'Y') UserRight.banUser,
-        if(dictionary["userRights_editBanCountry"] == 'Y') UserRight.editBanCountry,
-        if(dictionary["userRights_editBanCard"] == 'Y') UserRight.editBanCard,
-        if(dictionary["userRights_editBanUser"] == 'Y') UserRight.editBanUser
+        if(dictionary["userRight_createDatabase"] == 'Y') UserRight.createDatabase,
+        if(dictionary["userRight_createTable"] == 'Y') UserRight.createTable,
+        if(dictionary["userRight_setRootUsername"] == 'Y') UserRight.setRootUsername,
+        if(dictionary["userRight_setRootPassword"] == 'Y') UserRight.setRootPassword,
+        if(dictionary["userRight_createDbConnectionConfig"] == 'Y') UserRight.createDbConnectionConfig,
+        if(dictionary["userRight_editDbConnectionConfig"] == 'Y') UserRight.editDbConnectionConfig,
+        if(dictionary["userRight_registerCard"] == 'Y') UserRight.registerCard,
+        if(dictionary["userRight_registerCountry"] == 'Y') UserRight.registerCountry,
+        if(dictionary["userRight_viewCards"] == 'Y') UserRight.viewCards,
+        if(dictionary["userRight_viewCountries"] == 'Y') UserRight.viewCountries,
+        if(dictionary["userRight_registerUser"] == 'Y') UserRight.registerUser,
+        if(dictionary["userRight_resetPassword"] == 'Y') UserRight.resetPassword,
+        if(dictionary["userRight_viewUsers"] == 'Y') UserRight.viewUsers,
+        if(dictionary["userRight_banCountry"] == 'Y') UserRight.banCountry,
+        if(dictionary["userRight_banCard"] == 'Y') UserRight.banCard,
+        if(dictionary["userRight_banUser"] == 'Y') UserRight.banUser,
+        if(dictionary["userRight_editBanCountry"] == 'Y') UserRight.editBanCountry,
+        if(dictionary["userRight_editBanCard"] == 'Y') UserRight.editBanCard,
+        if(dictionary["userRight_editBanUser"] == 'Y') UserRight.editBanUser
       ]
     );
   }

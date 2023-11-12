@@ -7,7 +7,8 @@ import "../Bloc/CountryBloc.dart";
 
 class CountryScreen extends StatefulWidget
 {
-  const CountryScreen({super.key});
+  final UserDataModel? currentUser;
+  const CountryScreen({required this.currentUser, super.key});
 
   @override
   State<CountryScreen> createState() => _CountryScreenState();

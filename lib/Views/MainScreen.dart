@@ -177,7 +177,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const CountryScreen()
+                  builder: (context) => CountryScreen(currentUser: widget.currentUser)
                 )
               );
             });
@@ -186,7 +186,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const BankCardScreen()
+                  builder: (context) => BankCardScreen(currentUser: widget.currentUser)
                 )
               );
             });            
@@ -195,7 +195,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const ConfigScreen()
+                  builder: (context) => ConfigScreen(currentUser: widget.currentUser,)
                 )
               );
             });
@@ -239,7 +239,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const CountryScreen()
+                  builder: (context) => CountryScreen(currentUser: widget.currentUser)
                 )
               );
             });
@@ -248,7 +248,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const BankCardScreen()
+                  builder: (context) => BankCardScreen(currentUser: widget.currentUser)
                 )
               );
             });
@@ -257,7 +257,7 @@ class _MainScreenState extends State<MainScreen>
             setState(() {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const ConfigScreen()
+                  builder: (context) => ConfigScreen(currentUser: widget.currentUser,)
                 )
               );
             });            

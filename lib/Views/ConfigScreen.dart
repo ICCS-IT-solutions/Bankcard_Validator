@@ -4,13 +4,12 @@ import "dart:developer";
 import "dart:io";
 
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
-import "../Bloc/UserBloc.dart";
 import "../Models/UserDataModel.dart";
 
 class ConfigScreen extends StatefulWidget
 {
-  const ConfigScreen({super.key});
+  final UserDataModel? currentUser;
+  const ConfigScreen({required this.currentUser, super.key});
 
   @override
   State<ConfigScreen> createState() => _ConfigScreenState();
@@ -22,8 +21,9 @@ class _ConfigScreenState extends State<ConfigScreen>
   TextEditingController dbPasswordController = TextEditingController();
   TextEditingController dbHostController = TextEditingController();
   TextEditingController dbNameController = TextEditingController();
+  TextEditingController dbRootUsernameController = TextEditingController();
+  TextEditingController dbRootPasswordController = TextEditingController();
   final _formKey=GlobalKey<FormState>();
-  UserDataModel? currentUser;
   Widget? currentConfigWidget;
 
   @override 
@@ -32,7 +32,7 @@ class _ConfigScreenState extends State<ConfigScreen>
     super.initState();
     currentConfigWidget = BuildDatabaseConfigForm(context);
   }
-  
+
   void HandleSubmit()
   {
     String filePath = "./config/db.json";
@@ -71,78 +71,84 @@ class _ConfigScreenState extends State<ConfigScreen>
     Navigator.pop(context);
   }
 
-  Widget BuildDatabaseConfigForm(BuildContext context)
+  Widget BuildDatabaseConfigForm(BuildContext context, {UserDataModel? currentUser})
   {
-    return BlocListener<UserBloc, UserState>(
-      listener: (context, state) 
-      {
-        if(state.isAuthenticated)
-        {
-          setState(() {
-            currentUser = state.currentUser;
-          });
-        }
-        else if(!state.isAuthenticated)
-        {
-          setState(() {
-            currentUser = null;
-          });
-        }
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: _formKey,
-          child: Column
-          (
-            children: [
-              TextFormField(
-                controller: dbUserNameController,
-                decoration: const InputDecoration(
-                  label:Text("Database User"),
-                  ),
-                  validator: (value) => (value == null || value.isEmpty) ? "Please enter a user name" : null,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Form(
+        key: _formKey,
+        child: Column
+        (
+          children: [
+            TextFormField(
+              controller: dbUserNameController,
+              decoration: const InputDecoration(
+                label:Text("Database User"),
                 ),
-              TextFormField(
-                controller: dbPasswordController,
-                decoration: const InputDecoration(
-                  label:Text("Database password"),
-                  ),
-                  validator: (value) => (value == null || value.isEmpty) ? "Please enter a password" : null,
-                ),
-              TextFormField(
-                controller: dbHostController,
-                decoration: const InputDecoration(
-                  label: Text("IP address of the database server"),
-                ),
-                validator:(value) => (value == null || value.isEmpty) ? "Please enter an IP address" : null,
+                validator: (value) => (value == null || value.isEmpty) ? "Please enter a user name" : null,
               ),
-              TextFormField(
-                controller: dbNameController,
-                decoration: const InputDecoration(
-                  label: Text ("Database name"),
+            TextFormField(
+              controller: dbPasswordController,
+              decoration: const InputDecoration(
+                label:Text("Database password"),
                 ),
-                validator:(value) => (value == null || value.isEmpty) ? "Please enter a database name" : null,
+                validator: (value) => (value == null || value.isEmpty) ? "Please enter a password" : null,
               ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: (){},
-                    child: const Text("Submit"),
-                  ),
-                  const SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed: (){},
-                    child: const Text("Cancel"),
-                  )
-                ],
+            TextFormField(
+              controller: dbHostController,
+              decoration: const InputDecoration(
+                label: Text("IP address of the database server"),
+              ),
+              validator:(value) => (value == null || value.isEmpty) ? "Please enter an IP address" : null,
+            ),
+            TextFormField(
+              controller: dbNameController,
+              decoration: const InputDecoration(
+                label: Text ("Database name"),
+              ),
+              validator:(value) => (value == null || value.isEmpty) ? "Please enter a database name" : null,
+            ),
+            const SizedBox(height: 20),
+            widget.currentUser == null 
+            ? const SizedBox(height: 0)
+            :widget.currentUser!.UserRights!.contains(UserRight.setRootUsername) 
+              ?TextFormField(
+                controller: dbRootUsernameController,
+                decoration: const InputDecoration(
+                  label: Text("Root username"),
+                ),
+                validator:(value) => (value == null || value.isEmpty) ? "Please enter a username" : null,
               )
-            ]
-          ),
+              :const SizedBox(height: 0), //This widget having a height of 0 is essentially a null placeholder
+               widget.currentUser == null 
+              ? const SizedBox(height: 0) 
+              : widget.currentUser!.UserRights!.contains(UserRight.setRootPassword) 
+                ?TextFormField(
+                  controller: dbRootPasswordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    label: Text("Root password"),
+                  ),
+                  validator:(value) => (value == null || value.isEmpty) ? "Please enter a password" : null,
+                )
+                :const SizedBox(height: 0), //This widget having a height of 0 is essentially a null placeholder
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: (){},
+                  child: const Text("Submit"),
+                ),
+                const SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: (){},
+                  child: const Text("Cancel"),
+                )
+              ],
+            )
+          ]
         ),
-      )
+      ),
     );
   }
 
