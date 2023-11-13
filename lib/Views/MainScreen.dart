@@ -121,7 +121,7 @@ class _MainScreenState extends State<MainScreen>
   Widget BuildBankCardListTile(BankCardDataModel bankCard)
   {
     return SizedBox(
-      height: 180,
+      height: 190,
       width:  MediaQuery.of(context).size.width > 500 
         ? ((MediaQuery.of(context).size.width - 20)/2)
         : MediaQuery.of(context).size.width - 20,
